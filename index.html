@@ -1,26 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Testing Iframe</title>
-</head>
-<body style="width:100%; height:100%;">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Testing Iframe</title>
 
-  <!-- <div style="height: 630px;"> -->
-    <iframe width="100%" height="630px" allow="camera; microphone; fullscreen" 
-    src="https://rohitkadam.oghanna.com/nzt-mamx-zcy"
-    frameborder="0" allowfullscreen=""></iframe>
-  <!-- </div> -->
-  <!-- src="https://next.livesell.co/evp-sazc-rzk"  -->
+    <style>
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+      }
 
-  
-  <!-- <div style="aspect-ratio: 16 / 9; background-color: aquamarine;"> 
-    <iframe width="100%" height="100%" allow="camera; microphone; fullscreen" 
-    src="https://localhost:9999/xsi-waqu-zog"
-    frameborder="0" allowfullscreen=""></iframe>
-  </div> -->
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        max-height: 100%;
+        float: left;
+        width: 100%;
+      }
 
-</body>
+      .livesell-iframe-wrapper {
+        width: 100%;
+        height: 500px;
+      }
+    </style>
+
+    <script>
+      // Event listener to receive messages from the iframe
+      window.addEventListener('message', (event) => {
+
+        const container = window.document.getElementById('livesell-iframe');
+
+        if (event.data.fullscreen) {
+          container.style.position = 'fixed';
+          container.style.zIndex = '1000000000000';
+          container.style.height = '100vh';
+          container.style.width = '100vw';
+          container.style.top = '0px';
+          container.style.left = '0px';
+        } else {
+          container.style.position = null;
+          container.style.zIndex = null;
+          container.style.height = '500px';
+          container.style.width = '100%';
+          container.style.top = null;
+          container.style.left = null;
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div style="width: 100%; height: 200px; background-color: blueviolet"></div>
+
+    <div id="livesell-iframe" class="livesell-iframe-wrapper">
+      <iframe
+        width="100%"
+        height="100%"
+        allow="camera; microphone; fullscreen"
+        src="https://rohitkadam.oghanna.com/xsi-waqu-zog?iframe=true"
+        frameborder="0"
+        allowfullscreen=""
+        style="scroll-snap-type: x proximity"
+      >
+      </iframe>
+    </div>
+
+    <div style="width: 100%; height: 200px; background-color: blueviolet"></div>
+  </body>
 </html>
