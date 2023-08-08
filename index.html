@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>Testing Iframe</title>
 
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiveSell Iframe</title>
     <style>
       html {
         margin: 0;
@@ -14,58 +16,176 @@
       body {
         margin: 0;
         padding: 0;
-/*         height: 100%;
+        height: 100%;
         max-height: 100%;
         float: left;
-        width: 100%; */
-      }
-
-      .livesell-iframe-wrapper {
         width: 100%;
-        height: 500px;
+        position: relative; /* Or any other positioning you need */
+        /* overflow: hidden; */
       }
     </style>
+ 
+     <!-- Styles  -->
 
+     <style>    
+      #livesell-overlay-modal {
+        position: fixed;
+        z-index: 1000000000000;
+        height: 100vh;
+        width: 100vw;
+        bottom: 0px;
+        left: 0px;
+        display: none;
+        overscroll-behavior: none;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .livesell-floating-modal {
+        width: 320px !important;
+        height: 180px !important;
+        left: 6px !important;
+        bottom: 6px !important;
+        border-radius: 6px !important;
+        overflow: hidden !important;
+      }
+
+
+      #livesell-overlay-inner-div {
+        height: 92%;
+        width: 92%;
+      }
+
+      #livesell-checkout-modal {
+        position: fixed;
+        z-index: 1000000000;
+        height: 100vh;
+        width: 100vw;
+        top: 0px;
+        left: 0px;
+        display: none;
+        overscroll-behavior: none;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      @keyframes livesell-spinner {
+        0% {
+          transform: translate3d(-50%, -50%, 0) rotate(0deg);
+        }
+        100% {
+          transform: translate3d(-50%, -50%, 0) rotate(360deg);
+        }
+      }
+
+      #livesell-spin::before {
+        animation: 1.5s linear infinite livesell-spinner;
+        animation-play-state: inherit;
+        border: solid 5px #cfd0d1;
+        border-bottom-color: #3a3a3a;
+        border-radius: 50%;
+        content: "";
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        will-change: transform;
+      }
+
+      #livesell-modal-iframe {
+        z-index: 1000000;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+
+    </style>
+  
     <script>
+
       // Event listener to receive messages from the iframe
-      window.addEventListener('message', (event) => {
+      let eventListener = window.addEventListener('message', (event) => {
+        console.log("LiveSell Event", event)
 
-        const container = window.document.getElementById('livesell-iframe');
+        
+        if(event.data.actionType === "CHECKOUT_PAGE") {
+          const modalDiv = window.document.getElementById('livesell-checkout-modal');
+          const iframe = window.document.getElementById("livesell-checkout-iframe");
+          const meetingDiv = window.document.getElementById('livesell-overlay-modal');
+          const meetingInnerDiv = window.document.getElementById('livesell-overlay-inner-div');
+          
+          if(event.data.action === "OPEN") {
+            iframe.src = event.data.url
+            modalDiv.style.display = "flex"
 
-        if (event.data.fullscreen) {
-          container.style.position = 'fixed';
-          container.style.zIndex = '1000000000000';
-          container.style.height = '100vh';
-          container.style.width = '100vw';
-          container.style.top = '0px';
-          container.style.left = '0px';
-        } else {
-          container.style.position = null;
-          container.style.zIndex = null;
-          container.style.height = '500px';
-          container.style.width = '100%';
-          container.style.top = null;
-          container.style.left = null;
+            meetingDiv.classList.add("livesell-floating-modal")
+
+            meetingInnerDiv.style.width = "100%"
+            meetingInnerDiv.style.height = "100%"
+          } 
+          else {
+            // modalDiv.style.display = "none"
+            meetingDiv.classList.remove("livesell-floating-modal")
+            meetingInnerDiv.style.width = null
+            meetingInnerDiv.style.height = null
+          }
+
+          return
+        }
+
+        const modalDiv = window.document.getElementById('livesell-overlay-modal');
+        const iframe = window.document.getElementById("livesell-modal-iframe");
+        if(event.data.fullscreen) {
+          iframe.src = "https://rohitkadam.oghanna.com/xsi-waqu-zog?autoJoin=true&userName=" + event.data.userName
+          // iframe.src = "https://rohitkadam.oghanna.com/xsi-waqu-zog"
+          modalDiv.style.display = "flex"
+          document.body.style.overflow = "hidden"
+        } 
+        else if(event.data.fullscreen === false) {
+          document.body.style.overflow = null // UPDATE TO: Parent site overlay property
+          modalDiv.style.display = "none"
+          iframe.src = ""
         }
       });
-    </script>
-  </head>
-  <body>
-    <div style="width: 100%; height: 200px; background-color: blueviolet"></div>
 
-    <div id="livesell-iframe" class="livesell-iframe-wrapper">
+    </script>
+
+  </head>
+  <body >
+    <main>
+      <div style="width: 100%; height: 200px; background-color: blueviolet"></div>
+
       <iframe
-        width="100%"
-        height="100%"
-        allow="camera; microphone; fullscreen"
-        src="https://rohitkadam.oghanna.com/xsi-waqu-zog?iframe=true"
-        frameborder="0"
-        allowfullscreen=""
-        style="scroll-snap-type: x proximity"
-      >
+            width="100%"
+            height="550px"
+            allow="camera; microphone; fullscreen"
+            src="https://rohitkadam.oghanna.com/xsi-waqu-zog?iframe=true"
+            frameborder="0"
+            allowfullscreen=""
+          >
+      </iframe>
+      
+      <div style="width: 100%; height: 200px; background-color: blueviolet"></div>
+    </main>
+
+    <div id="livesell-overlay-modal">
+      <div id="livesell-overlay-inner-div">
+        <iframe id="livesell-modal-iframe" width="100%" height="100%" allow="camera; microphone; fullscreen" frameborder="0"
+        allowfullscreen="">
+        </iframe>
+      </div>
+      <!-- <div id="livesell-spin"></div> -->
+    </div>
+
+    <div id="livesell-checkout-modal">
+      <!-- <div id="livesell-spin"></div> -->
+      <iframe id="livesell-checkout-iframe" width="100%" height="100%" allow="" frameborder="0"
+        allowfullscreen="">
       </iframe>
     </div>
 
-    <div style="width: 100%; height: 200px; background-color: blueviolet"></div>
-  </body>
+    </body>
 </html>
