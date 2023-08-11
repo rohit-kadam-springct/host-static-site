@@ -31,7 +31,7 @@
       #livesell-overlay-modal {
         position: fixed;
         z-index: 1000000000000;
-        height: 100vh;
+        height: 100%;
         width: 100vw;
         bottom: 0px;
         left: 0px;
@@ -45,8 +45,8 @@
       .livesell-floating-modal {
         width: 320px !important;
         height: 180px !important;
-        left: 6px !important;
-        bottom: 6px !important;
+        left: 10px !important;
+        bottom: 10px !important;
         border-radius: 6px !important;
         overflow: hidden !important;
       }
@@ -60,7 +60,7 @@
       #livesell-checkout-modal {
         position: fixed;
         z-index: 1000000000;
-        height: 100vh;
+        height: 100%;
         width: 100vw;
         top: 0px;
         left: 0px;
@@ -80,7 +80,7 @@
         }
       }
 
-      #livesell-spin::before {
+      .livesell-spin::before {
         animation: 1.5s linear infinite livesell-spinner;
         animation-play-state: inherit;
         border: solid 5px #cfd0d1;
@@ -97,7 +97,8 @@
       }
 
       #livesell-modal-iframe {
-        z-index: 1000000;
+        position: relative;
+        z-index: 10000000;
         border-radius: 6px;
         overflow: hidden;
       }
@@ -139,7 +140,7 @@
         const modalDiv = window.document.getElementById('livesell-overlay-modal');
         const iframe = window.document.getElementById("livesell-modal-iframe");
         if(event.data.fullscreen) {
-          iframe.src = "https://rohitkadam.oghanna.com/xsi-waqu-zog?autoJoin=true&userName=" + event.data.userName
+          iframe.src = "https://localhost:9999/xsi-waqu-zog?autoJoin=true&userName=" + event.data.userName
           // iframe.src = "https://rohitkadam.oghanna.com/xsi-waqu-zog"
           modalDiv.style.display = "flex"
           document.body.style.overflow = "hidden"
@@ -162,7 +163,7 @@
             width="100%"
             height="550px"
             allow="camera; microphone; fullscreen"
-            src="https://rohitkadam.oghanna.com/xsi-waqu-zog?iframe=true"
+            src="https://localhost:9999/xsi-waqu-zog?iframe=true"
             frameborder="0"
             allowfullscreen=""
           >
@@ -173,11 +174,11 @@
 
     <div id="livesell-overlay-modal">
       <div id="livesell-overlay-inner-div">
+        <div class="livesell-spin"></div>
         <iframe id="livesell-modal-iframe" width="100%" height="100%" allow="camera; microphone; fullscreen" frameborder="0"
         allowfullscreen="">
         </iframe>
       </div>
-      <!-- <div id="livesell-spin"></div> -->
     </div>
 
     <div id="livesell-checkout-modal">
