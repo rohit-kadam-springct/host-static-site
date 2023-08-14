@@ -110,6 +110,7 @@
       // Event listener to receive messages from the iframe
       let eventListener = window.addEventListener('message', (event) => {
         console.log("LiveSell Event", event)
+        const meetingIframe = window.document.getElementById("livesell-modal-iframe");
 
         
         if(event.data.actionType === "CHECKOUT_PAGE") {
@@ -119,13 +120,13 @@
           const meetingInnerDiv = window.document.getElementById('livesell-overlay-inner-div');
           
           if(event.data.action === "OPEN") {
+            meetingIframe.contentWindow.postMessage({data: "server", code: event.data.code}, '*')
             iframe.src = event.data.url
             modalDiv.style.display = "flex"
-
             meetingDiv.classList.add("livesell-floating-modal")
-
             meetingInnerDiv.style.width = "100%"
             meetingInnerDiv.style.height = "100%"
+
           } 
           else {
             modalDiv.style.display = "none"
@@ -141,7 +142,6 @@
         const iframe = window.document.getElementById("livesell-modal-iframe");
         if(event.data.fullscreen) {
           iframe.src = "https://rohitkadam.oghanna.com/xsi-waqu-zog?autoJoin=true&userName=" + event.data.userName
-          // iframe.src = "https://rohitkadam.oghanna.com/xsi-waqu-zog"
           modalDiv.style.display = "flex"
           document.body.style.overflow = "hidden"
         } 
