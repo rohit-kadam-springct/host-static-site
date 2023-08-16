@@ -28,9 +28,9 @@
      <!-- Styles  -->
 
      <style>    
-      #livesell-overlay-modal {
+      #livesell-meeting-modal {
         position: fixed;
-        z-index: 1000000000000;
+        z-index: 2147483647;
         height: 100%;
         width: 100vw;
         bottom: 0px;
@@ -50,14 +50,17 @@
         border-radius: 6px !important;
         overflow: hidden !important;
       }
-
-
-      #livesell-overlay-inner-div {
-        height: 92%;
-        width: 92%;
+      
+      #livesell-meeting-iframe {
+        position: relative;
+        z-index: 2147483646;
+        border-radius: 6px;
+        overflow: hidden;
+        height: calc(100% - 32px); 
+        width: calc(100% - 32px);
       }
 
-      #livesell-checkout-modal {
+      #livesell-product-modal {
         position: fixed;
         z-index: 1000000000;
         height: 100%;
@@ -71,84 +74,50 @@
         background: rgba(0, 0, 0, 0.5);
       }
 
-      @keyframes livesell-spinner {
-        0% {
-          transform: translate3d(-50%, -50%, 0) rotate(0deg);
-        }
-        100% {
-          transform: translate3d(-50%, -50%, 0) rotate(360deg);
-        }
-      }
-
-      .livesell-spin::before {
-        animation: 1.5s linear infinite livesell-spinner;
-        animation-play-state: inherit;
-        border: solid 5px #cfd0d1;
-        border-bottom-color: #3a3a3a;
-        border-radius: 50%;
-        content: "";
-        height: 40px;
-        width: 40px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate3d(-50%, -50%, 0);
-        will-change: transform;
-      }
-
-      #livesell-modal-iframe {
-        position: relative;
-        z-index: 10000000;
-        border-radius: 6px;
-        overflow: hidden;
-      }
-
     </style>
   
     <script>
 
-      // Event listener to receive messages from the iframe
+      // Event listener to receive messages from the livesell meeting iframe
       let eventListener = window.addEventListener('message', (event) => {
-        console.log("LiveSell Event", event)
-        const meetingIframe = window.document.getElementById("livesell-modal-iframe");
+        const MEETING_URL = "https://rohitkadam.oghanna.com/xsi-waqu-zog"
+        const LIVESELL_MEETING_ORIGIN = new URL(MEETING_URL).origin
 
+        if(event.origin !== LIVESELL_MEETING_ORIGIN) return 
+
+        const meetingModal = window.document.getElementById('livesell-meeting-modal');
+        const meetingIframe = window.document.getElementById("livesell-meeting-iframe");
         
         if(event.data.actionType === "CHECKOUT_PAGE") {
-          const modalDiv = window.document.getElementById('livesell-checkout-modal');
-          const iframe = window.document.getElementById("livesell-checkout-iframe");
-          const meetingDiv = window.document.getElementById('livesell-overlay-modal');
-          const meetingInnerDiv = window.document.getElementById('livesell-overlay-inner-div');
+          const productModalEle = window.document.getElementById('livesell-product-modal');
+          const productIframe = window.document.getElementById("livesell-checkout-iframe");
           
           if(event.data.action === "OPEN") {
-            meetingIframe.contentWindow.postMessage({data: "server", code: event.data.code}, '*')
-            iframe.src = event.data.url
-            modalDiv.style.display = "flex"
-            meetingDiv.classList.add("livesell-floating-modal")
-            meetingInnerDiv.style.width = "100%"
-            meetingInnerDiv.style.height = "100%"
-
+            meetingIframe.contentWindow.postMessage({data: "server", code: event.data.code}, LIVESELL_MEETING_ORIGIN)
+            productIframe.src = event.data.url
+            productModalEle.style.display = "flex"
+            meetingModal.classList.add("livesell-floating-modal")
+            meetingIframe.style.width = "100%"
+            meetingIframe.style.height = "100%"
           } 
           else {
-            modalDiv.style.display = "none"
-            meetingDiv.classList.remove("livesell-floating-modal")
-            meetingInnerDiv.style.width = null
-            meetingInnerDiv.style.height = null
+            productModalEle.style.display = "none"
+            meetingModal.classList.remove("livesell-floating-modal")
+            meetingIframe.style.width = null
+            meetingIframe.style.height = null
           }
-
           return
         }
 
-        const modalDiv = window.document.getElementById('livesell-overlay-modal');
-        const iframe = window.document.getElementById("livesell-modal-iframe");
         if(event.data.fullscreen) {
-          iframe.src = "https://rohitkadam.oghanna.com/xsi-waqu-zog?autoJoin=true&userName=" + event.data.userName
-          modalDiv.style.display = "flex"
+          meetingIframe.src = `${MEETING_URL}?autoJoin=true&userName=${event.data.userName}`
+          meetingModal.style.display = "flex"
           document.body.style.overflow = "hidden"
         } 
         else if(event.data.fullscreen === false) {
           document.body.style.overflow = null // UPDATE TO: Parent site overlay property
-          modalDiv.style.display = "none"
-          iframe.src = ""
+          meetingModal.style.display = "none"
+          meetingIframe.src = ""
         }
       });
 
@@ -172,17 +141,13 @@
       <div style="width: 100%; height: 200px; background-color: blueviolet"></div>
     </main>
 
-    <div id="livesell-overlay-modal">
-      <div id="livesell-overlay-inner-div">
-        <div class="livesell-spin"></div>
-        <iframe id="livesell-modal-iframe" width="100%" height="100%" allow="camera; microphone; fullscreen" frameborder="0"
+    <div id="livesell-meeting-modal">
+        <iframe id="livesell-meeting-iframe"  allow="camera; microphone; fullscreen" frameborder="0"
         allowfullscreen="">
         </iframe>
-      </div>
     </div>
 
-    <div id="livesell-checkout-modal">
-      <!-- <div id="livesell-spin"></div> -->
+    <div id="livesell-product-modal">
       <iframe id="livesell-checkout-iframe" width="100%" height="100%" allow="" frameborder="0"
         allowfullscreen="">
       </iframe>
