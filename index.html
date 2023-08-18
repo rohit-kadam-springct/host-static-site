@@ -89,7 +89,7 @@
             width="100%"
             height="550px"
             allow="camera; microphone; fullscreen"
-            src="https://rohitkadam.oghanna.com/nzt-mamx-zcy?iframe=true"
+            src="https://1b29-183-87-246-62.ngrok-free.app/xsi-waqu-zog?iframe=true"
             frameborder="0"
             allowfullscreen=""
           >
@@ -98,13 +98,15 @@
       <div style="width: 100%; height: 200px; background-color: blueviolet" />
     </main>
 
-    <div id="livesell-meeting-modal">
-        <iframe id="livesell-meeting-iframe"  allow="camera; microphone; fullscreen" frameborder="0"
-        allowfullscreen="" > </iframe>
-    </div>
-
-    <div id="livesell-product-modal">
-      <iframe id="livesell-product-iframe" width="100%" height="100%" allow="" frameborder="0" allowfullscreen="" > </iframe>
+    <div style="position: relative;">
+      <div id="livesell-meeting-modal">
+          <iframe id="livesell-meeting-iframe"  allow="camera; microphone; fullscreen" frameborder="0"
+          allowfullscreen="" > </iframe>
+      </div>
+  
+      <div id="livesell-product-modal">
+        <iframe id="livesell-product-iframe" width="100%" height="100%" allow="" frameborder="0" allowfullscreen="" > </iframe>
+      </div>
     </div>
 
     <script>
@@ -112,7 +114,7 @@
       (function () {
 
         // Add your meeting link here
-        const MEETING_URL = "https://rohitkadam.oghanna.com/nzt-mamx-zcy"
+        const MEETING_URL = "https://1b29-183-87-246-62.ngrok-free.app/xsi-waqu-zog"
         const LIVESELL_MEETING_ORIGIN = new URL(MEETING_URL).origin
 
         const meetingIframe = window.document.getElementById("livesell-meeting-iframe");
@@ -191,6 +193,15 @@
           meetingModal.style.top = meetingIframeTop + 'px'
           meetingModal.style.left = meetingIframeLeft + 'px'
         }
+
+
+        window.addEventListener('resize', () => {
+
+          const { left, top } = meetingModal.getBoundingClientRect();
+          console.log("resize", left, top)
+          meetingModal.style.left = left + 'px';
+          meetingModal.style.top = top + 'px';
+        });
 
       })()
     
