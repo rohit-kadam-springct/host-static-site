@@ -192,8 +192,9 @@
         function handleFrameMousemove (offsetX, offsetY) {
           meetingIframeTop += offsetY
           meetingIframeLeft += offsetX
-          meetingModal.style.top = meetingIframeTop + 'px'
-          meetingModal.style.left = meetingIframeLeft + 'px'
+          // meetingModal.style.top = meetingIframeTop + 'px'
+          // meetingModal.style.left = meetingIframeLeft + 'px'
+          draggableDiv.style.transform = `translate(${meetingIframeLeft}px, ${meetingIframeTop}px)`
         }
 
 
