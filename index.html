@@ -29,6 +29,7 @@
 
      <style>    
       #livesell-meeting-modal {
+        /* position: absolute; */
         position: fixed;
         z-index: 2147483647;
         height: 100%;
@@ -36,17 +37,20 @@
         bottom: 0px;
         left: 0px;
         display: none;
-        overscroll-behavior: none;
+        /* overscroll-behavior: none; */
         justify-content: center;
         align-items: center;
         background: rgba(0, 0, 0, 0.5);
+        /* will-change: transform; */
+        /* scroll-behavior: smooth;  */
+        /* user-select: "none" */
       }
 
       .livesell-floating-modal {
         width: 320px !important;
         height: 180px !important;
-        left: 10px !important;
-        bottom: 10px !important;
+        left: 10px;
+        bottom: 10px;
         border-radius: 6px !important;
         overflow: hidden !important;
       }
@@ -76,53 +80,6 @@
 
     </style>
   
-    <script>
-
-      // Event listener to receive messages from the livesell meeting iframe
-      let eventListener = window.addEventListener('message', (event) => {
-        const MEETING_URL = "https://rohitkadam.oghanna.com/xsi-waqu-zog"
-        const LIVESELL_MEETING_ORIGIN = new URL(MEETING_URL).origin
-
-        if(event.origin !== LIVESELL_MEETING_ORIGIN) return 
-
-        const meetingModal = window.document.getElementById('livesell-meeting-modal');
-        const meetingIframe = window.document.getElementById("livesell-meeting-iframe");
-        
-        if(event.data.actionType === "CHECKOUT_PAGE") {
-          const productModalEle = window.document.getElementById('livesell-product-modal');
-          const productIframe = window.document.getElementById("livesell-checkout-iframe");
-          
-          if(event.data.action === "OPEN") {
-            meetingIframe.contentWindow.postMessage({data: "server", code: event.data.code}, LIVESELL_MEETING_ORIGIN)
-            productIframe.src = event.data.url
-            productModalEle.style.display = "flex"
-            meetingModal.classList.add("livesell-floating-modal")
-            meetingIframe.style.width = "100%"
-            meetingIframe.style.height = "100%"
-          } 
-          else {
-            productModalEle.style.display = "none"
-            meetingModal.classList.remove("livesell-floating-modal")
-            meetingIframe.style.width = null
-            meetingIframe.style.height = null
-          }
-          return
-        }
-
-        if(event.data.fullscreen) {
-          meetingIframe.src = `${MEETING_URL}?autoJoin=true&userName=${event.data.userName}`
-          meetingModal.style.display = "flex"
-          document.body.style.overflow = "hidden"
-        } 
-        else if(event.data.fullscreen === false) {
-          document.body.style.overflow = null // UPDATE TO: Parent site overlay property
-          meetingModal.style.display = "none"
-          meetingIframe.src = ""
-        }
-      });
-
-    </script>
-
   </head>
   <body >
     <main>
@@ -132,26 +89,113 @@
             width="100%"
             height="550px"
             allow="camera; microphone; fullscreen"
-            src="https://rohitkadam.oghanna.com/xsi-waqu-zog?iframe=true"
+            src="https://rohitkadam.oghanna.com/nzt-mamx-zcy?iframe=true"
             frameborder="0"
             allowfullscreen=""
           >
       </iframe>
       
-      <div style="width: 100%; height: 200px; background-color: blueviolet"></div>
+      <div style="width: 100%; height: 200px; background-color: blueviolet" />
     </main>
 
     <div id="livesell-meeting-modal">
         <iframe id="livesell-meeting-iframe"  allow="camera; microphone; fullscreen" frameborder="0"
-        allowfullscreen="">
-        </iframe>
+        allowfullscreen="" > </iframe>
     </div>
 
     <div id="livesell-product-modal">
-      <iframe id="livesell-checkout-iframe" width="100%" height="100%" allow="" frameborder="0"
-        allowfullscreen="">
-      </iframe>
+      <iframe id="livesell-product-iframe" width="100%" height="100%" allow="" frameborder="0" allowfullscreen="" > </iframe>
     </div>
+
+    <script>
+
+      (function () {
+
+        // Add your meeting link here
+        const MEETING_URL = "https://rohitkadam.oghanna.com/nzt-mamx-zcy"
+        const LIVESELL_MEETING_ORIGIN = new URL(MEETING_URL).origin
+
+        const meetingIframe = window.document.getElementById("livesell-meeting-iframe");
+        const meetingModal = window.document.getElementById('livesell-meeting-modal');  
+        
+        // Event listener to receive messages from the livesell meeting iframe
+        let eventListener = window.addEventListener('message', (event) => {
+          
+          if (event.origin !== LIVESELL_MEETING_ORIGIN) return
+          const data = event.data
+
+          switch(data.actionType) {
+            case 'LIVESELL_DRAG_MOUSEMOVE':
+              handleFrameMousemove(data.offsetX, data.offsetY)
+              break
+            case 'LIVESELL_DRAG_START':
+              handleStartDrag()
+              break
+            case 'PRODUCT_PAGE':
+              handleProductPage(data)
+              break
+          }
+          
+          if (event.data.fullscreen) {
+            meetingIframe.src = `${MEETING_URL}?autoJoin=true&userName=${event.data.userName}`
+            meetingModal.style.display = "flex"
+            document.body.style.overflow = "hidden"
+          }
+          else if (event.data.fullscreen === false) {
+            document.body.style.overflow = null // UPDATE TO: Parent site overlay property
+            meetingModal.style.display = "none"
+            meetingIframe.src = ""
+          }
+        });
+
+        function handleProductPage(data) {
+          const productModalEle = window.document.getElementById('livesell-product-modal');
+          const productIframe = window.document.getElementById("livesell-product-iframe");
+
+          if (data.action === "OPEN") {
+            meetingIframe.contentWindow.postMessage({ data: "server", code: data.code }, LIVESELL_MEETING_ORIGIN)
+            productIframe.src = data.url
+            productModalEle.style.display = "flex"
+            meetingModal.classList.add("livesell-floating-modal")
+            meetingIframe.style.width = "100%"
+            meetingIframe.style.height = "100%"
+            meetingModal.style.bottom = '10px'
+            meetingModal.style.left = '10px'
+          }
+          else {
+            productModalEle.style.display = "none"
+            meetingModal.classList.remove("livesell-floating-modal")
+            meetingModal.style.top = null
+            meetingModal.style.bottom = '0px'
+            meetingModal.style.left = '0px'
+            
+            meetingIframe.style.width = null
+            meetingIframe.style.height = null
+
+          }
+        } 
+
+        
+        // Handle Dragging Event 
+        let meetingIframeTop = 0
+        let meetingIframeLeft = 10
+
+        function handleStartDrag() {
+          meetingIframeTop = meetingModal?.offsetTop
+          meetingIframeLeft = meetingModal?.offsetLeft
+        }
+
+        function handleFrameMousemove (offsetX, offsetY) {
+          meetingIframeTop += offsetY
+          meetingIframeLeft += offsetX
+          meetingModal.style.top = meetingIframeTop + 'px'
+          meetingModal.style.left = meetingIframeLeft + 'px'
+        }
+
+      })()
+    
+
+    </script>
 
     </body>
 </html>
