@@ -43,7 +43,6 @@
         background: rgba(0, 0, 0, 0.5);
         /* will-change: transform; */
         /* scroll-behavior: smooth;  */
-        /* user-select: "none" */
       }
 
       .livesell-floating-modal {
@@ -127,11 +126,11 @@
           const data = event.data
 
           switch(data.actionType) {
+            case 'LIVESELL_DRAG_START':
+              handleStartDrag(data.mouseX, data.mouseY)
+            break
             case 'LIVESELL_DRAG_MOUSEMOVE':
               handleFrameMousemove(data.offsetX, data.offsetY)
-              break
-            case 'LIVESELL_DRAG_START':
-              handleStartDrag()
               break
             case 'PRODUCT_PAGE':
               handleProductPage(data)
@@ -182,7 +181,7 @@
         let meetingIframeTop = 0
         let meetingIframeLeft = 10
 
-        function handleStartDrag() {
+        function handleStartDrag(mouseX, mouseY) {
           meetingIframeTop = meetingModal?.offsetTop
           meetingIframeLeft = meetingModal?.offsetLeft
         }
@@ -193,15 +192,6 @@
           meetingModal.style.top = meetingIframeTop + 'px'
           meetingModal.style.left = meetingIframeLeft + 'px'
         }
-
-
-        window.addEventListener('resize', () => {
-
-          const { left, top } = meetingModal.getBoundingClientRect();
-          console.log("resize", left, top)
-          meetingModal.style.left = left + 'px';
-          meetingModal.style.top = top + 'px';
-        });
 
       })()
     
