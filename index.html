@@ -181,6 +181,7 @@
             // add draggable Overlay
             showDraggableOverlay()
           }
+          addParentResizeListener()
 
         }
         else {
@@ -193,6 +194,7 @@
           meetingIframe.style.width = null
           meetingIframe.style.height = null
           hideDraggableOverlay()
+          removeParentResizeListener()
         }
       }
 
@@ -200,6 +202,8 @@
       let meetingIframeTop = 0
       let meetingIframeLeft = 10
       let pageMouseX, pageMouseY
+      let innerWidth = window.innerWidth
+      let innerHeight = window.innerHeight
 
       function showDraggableOverlay() {
         draggableOverlay.style.display = "flex"
@@ -251,7 +255,7 @@
 
       function handleParentTouchStart(evt) {
         evt.preventDefault()
-      
+
         pageMouseX = evt.touches[0].clientX
         pageMouseY = evt.touches[0].clientY
 
@@ -296,6 +300,28 @@
       function clampRight(value) {
         // avoid dragging div go beyond the screen than half
         return Math.max(Math.min(value, window.innerHeight - meetingModal.offsetHeight / 2), -(meetingModal.offsetHeight / 2))
+      }
+
+      function addParentResizeListener() {
+        // Listen for the parent window resize event
+        window.addEventListener('resize', handleParentResize);
+      }
+
+      function removeParentResizeListener() {
+        window.removeEventListener('resize', handleParentResize);
+      }
+
+      function handleParentResize(evt) {
+        if (!meetingIframeTop || !meetingIframeLeft) return
+
+        // Calculate the updated position based on the existing values
+        const resizeTop = (meetingIframeTop * (window.innerHeight - meetingModal.offsetHeight)) / (innerHeight - meetingModal.offsetHeight);
+        const resizeLeft = (meetingIframeLeft * (window.innerWidth - meetingModal.offsetWidth)) / (innerWidth - meetingModal.offsetWidth);
+
+        updateMeetingModalPosition(resizeTop, resizeLeft)
+
+        innerHeight = window.innerHeight
+        innerWidth = window.innerWidth
       }
 
     })()
