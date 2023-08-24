@@ -45,11 +45,10 @@
       background: rgba(0, 0, 0, 0.5);
       will-change: transform;
       /* scroll-behavior: smooth;  */
+      /* transition: all .2s linear; */
     }
 
     .livesell-floating-modal {
-      width: 320px !important;
-      height: 180px !important;
       left: 10px;
       bottom: 10px;
       border-radius: 6px !important;
@@ -72,6 +71,28 @@
       width: calc(100% - 110px);
       display: none;
       cursor: move;
+    }
+
+    #livesell-resizeable-overlay {
+      position: absolute;
+      z-index: 2147483647;
+      height: 48px;
+      width: 48px;
+      right: 0;
+      top: 0;
+      display: none;
+      cursor: nesw-resize;
+    }
+
+    #livesell-transparent-overlay {
+      position: fixed;
+      z-index: 2147483647;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      display: none;
+      cursor: nesw-resize;
     }
 
     #livesell-product-modal {
@@ -104,10 +125,12 @@
   </main>
 
   <div style="position: relative;">
+    <div id="livesell-transparent-overlay"></div>
     <div id="livesell-meeting-modal">
       <iframe id="livesell-meeting-iframe" allow="camera; microphone; fullscreen" frameborder="0" allowfullscreen="">
       </iframe>
       <div id="livesell-draggable-overlay"></div>
+      <div id="livesell-resizeable-overlay"></div>
     </div>
 
     <div id="livesell-product-modal">
@@ -129,6 +152,8 @@
       const meetingIframe = window.document.getElementById("livesell-meeting-iframe");
       const meetingModal = window.document.getElementById('livesell-meeting-modal');
       const draggableOverlay = window.document.getElementById('livesell-draggable-overlay')
+      const resizeOverlay = window.document.getElementById('livesell-resizeable-overlay')
+      const transparentOverlay = window.document.getElementById("livesell-transparent-overlay")
 
       // Event listener to receive messages from the livesell meeting iframe
       const eventListener = window.addEventListener('message', (event) => {
@@ -172,6 +197,8 @@
           productIframe.src = data.url
           productModalEle.style.display = "flex"
           meetingModal.classList.add("livesell-floating-modal")
+          meetingModal.style.width = "320px";
+          meetingModal.style.height= "180px";
           meetingIframe.style.width = "100%"
           meetingIframe.style.height = "100%"
           meetingModal.style.bottom = '10px'
@@ -182,11 +209,14 @@
             showDraggableOverlay()
           }
           addParentResizeListener()
+          showResizeOverlay()
 
         }
         else {
           productModalEle.style.display = "none"
           meetingModal.classList.remove("livesell-floating-modal")
+          meetingModal.style.width = null;
+          meetingModal.style.height= null;
           meetingModal.style.top = null
           meetingModal.style.bottom = '0px'
           meetingModal.style.left = '0px'
@@ -195,6 +225,7 @@
           meetingIframe.style.height = null
           hideDraggableOverlay()
           removeParentResizeListener()
+          hideResizeOverlay()
         }
       }
 
@@ -322,6 +353,61 @@
 
         innerHeight = window.innerHeight
         innerWidth = window.innerWidth
+      }
+
+      let isResizing = false
+      let startX, startY, startWidth, startHeight;
+
+      function handleResizeStart(evt) {
+        isResizing = true
+        startX = evt.clientX;
+        startY = evt.clientY;
+        startWidth = meetingModal.offsetWidth;
+        startHeight = meetingModal.offsetHeight;
+        transparentOverlay.style.display = "flex"
+
+        document.addEventListener('mousemove', handleResizeMove);
+        document.addEventListener('mouseup', handleResizeStop);
+
+        resizeOverlay.addEventListener('touchmove', handleResizeTouchMove)
+        resizeOverlay.addEventListener('touchend', handleResizeStop)
+      }
+
+      function handleResizeMove(evt) {
+        var ratio = 16 / 9;
+        const width = startWidth + evt.clientX - startX
+        meetingModal.style.width = (width) + 'px';
+        meetingModal.style.height = (width / ratio) + 'px';
+      }
+
+      function handleResizeTouchMove(evt) {
+        handleResizeMove(evt.touches[0])
+      }
+
+      function handleResizeStop(evt) {
+        isResizing = false
+        transparentOverlay.style.display = "none"
+        document.removeEventListener("mouseup", handleResizeStop)
+        document.removeEventListener("mousemove", handleResizeMove)
+
+        resizeOverlay.addEventListener('touchend', handleResizeStop)
+        resizeOverlay.removeEventListener('touchmove', handleResizeTouchMove)
+      }
+
+      function handleResizeTouchStart(evt) {
+        handleResizeStart(evt.touches[0])
+      }
+
+      function showResizeOverlay() {
+        resizeOverlay.style.display = "flex"
+        resizeOverlay.addEventListener("mousedown", handleResizeStart, false)
+        resizeOverlay.addEventListener('touchstart', handleResizeTouchStart, false)
+      }
+
+      function hideResizeOverlay() {
+        resizeOverlay.style.display = "none"
+        resizeOverlay.removeEventListener("mousedown", handleResizeStart, false)
+        resizeOverlay.removeEventListener('touchstart', handleResizeTouchStart, false)
       }
 
     })()
