@@ -312,14 +312,15 @@
       }
 
       function updateMeetingModalPosition(top, left) {
-        const clampedTop = clampRight(top);
+        const clampedTop = clampHeight(top);
         const clampedLeft = clampLeft(left);
 
         meetingIframeTop = clampedTop
         meetingIframeLeft = clampedLeft
 
         // apply the position
-        meetingModal.style.top = clampedTop + 'px'
+        // calculating bottom position using top position
+        meetingModal.style.bottom = ( window.innerHeight - clampedTop - meetingModal.offsetHeight) + 'px'
         meetingModal.style.left = clampedLeft + 'px'
       }
 
@@ -328,7 +329,7 @@
         return Math.max(Math.min(value, window.innerWidth - meetingModal.offsetWidth / 2), -(meetingModal.offsetWidth / 2));
       }
 
-      function clampRight(value) {
+      function clampHeight(value) {
         // avoid dragging div go beyond the screen than half
         return Math.max(Math.min(value, window.innerHeight - meetingModal.offsetHeight / 2), -(meetingModal.offsetHeight / 2))
       }
