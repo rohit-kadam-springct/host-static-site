@@ -45,7 +45,7 @@
       background: rgba(0, 0, 0, 0.5);
       will-change: transform;
       /* scroll-behavior: smooth;  */
-      /* transition: all .2s linear; */
+      /* transition: all .1s ease; */
     }
 
     .livesell-floating-modal {
@@ -154,6 +154,25 @@
       const draggableOverlay = window.document.getElementById('livesell-draggable-overlay')
       const resizeOverlay = window.document.getElementById('livesell-resizeable-overlay')
       const transparentOverlay = window.document.getElementById("livesell-transparent-overlay")
+      const isSmallDevice = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+      const floatingWindowSize = isSmallDevice ? {
+        // for small device
+        minWidth: 160,
+        minHeight: 90,
+        width: 240,
+        height: 135,
+        maxWidth: 320,
+        maxHeight:180
+      } : {
+        // for large device
+        minWidth: 240,
+        minHeight: 135,
+        width: 320,
+        height: 180,
+        maxWidth: 640,
+        maxHeight:360
+      }
 
       // Event listener to receive messages from the livesell meeting iframe
       const eventListener = window.addEventListener('message', (event) => {
@@ -197,8 +216,9 @@
           productIframe.src = data.url
           productModalEle.style.display = "flex"
           meetingModal.classList.add("livesell-floating-modal")
-          meetingModal.style.width = "320px";
-          meetingModal.style.height= "180px";
+
+          meetingModal.style.width =  `${floatingWindowSize.width}px`;
+          meetingModal.style.height=  `${floatingWindowSize.height}px`;
           meetingIframe.style.width = "100%"
           meetingIframe.style.height = "100%"
           meetingModal.style.bottom = '10px'
@@ -319,7 +339,7 @@
         meetingIframeLeft = clampedLeft
 
         // apply the position
-        // calculating bottom position using top position
+        // calculating bottom position using top 
         meetingModal.style.bottom = ( window.innerHeight - clampedTop - meetingModal.offsetHeight) + 'px'
         meetingModal.style.left = clampedLeft + 'px'
       }
@@ -367,7 +387,7 @@
         startHeight = meetingModal.offsetHeight;
         transparentOverlay.style.display = "flex"
 
-        document.addEventListener('mousemove', handleResizeMove);
+        document.addEventListener('mousemove', handleResizeMouseMove);
         document.addEventListener('mouseup', handleResizeStop);
 
         resizeOverlay.addEventListener('touchmove', handleResizeTouchMove)
@@ -377,11 +397,30 @@
       function handleResizeMove(evt) {
         var ratio = 16 / 9;
         const width = startWidth + evt.clientX - startX
-        meetingModal.style.width = (width) + 'px';
-        meetingModal.style.height = (width / ratio) + 'px';
+        const height = (width / ratio)
+
+        if(canResize(width, height)) return
+
+        meetingModal.style.width = width + 'px';
+        meetingModal.style.height = height + 'px';
+      }
+
+      function canResize(width, height) {
+        return (width < floatingWindowSize.minWidth
+          || height < floatingWindowSize.minHeight
+          || width > floatingWindowSize.maxWidth
+          || height > floatingWindowSize.maxHeight
+          || width > window.innerWidth
+          || height > window.innerHeight)
+      }
+
+      function handleResizeMouseMove(evt) {
+        evt.preventDefault()
+        handleResizeMove(evt)
       }
 
       function handleResizeTouchMove(evt) {
+        evt.preventDefault()
         handleResizeMove(evt.touches[0])
       }
 
@@ -389,26 +428,32 @@
         isResizing = false
         transparentOverlay.style.display = "none"
         document.removeEventListener("mouseup", handleResizeStop)
-        document.removeEventListener("mousemove", handleResizeMove)
+        document.removeEventListener("mousemove", handleResizeMouseMove)
 
         resizeOverlay.addEventListener('touchend', handleResizeStop)
         resizeOverlay.removeEventListener('touchmove', handleResizeTouchMove)
       }
 
       function handleResizeTouchStart(evt) {
+        evt.preventDefault()
         handleResizeStart(evt.touches[0])
+      }
+
+      function handleResizeMouseStart(evt) {
+        evt.preventDefault()
+        handleResizeStart(evt)
       }
 
       function showResizeOverlay() {
         resizeOverlay.style.display = "flex"
-        resizeOverlay.addEventListener("mousedown", handleResizeStart, false)
-        resizeOverlay.addEventListener('touchstart', handleResizeTouchStart, false)
+        resizeOverlay.addEventListener("mousedown", handleResizeMouseStart)
+        resizeOverlay.addEventListener('touchstart', handleResizeTouchStart)
       }
 
       function hideResizeOverlay() {
         resizeOverlay.style.display = "none"
-        resizeOverlay.removeEventListener("mousedown", handleResizeStart, false)
-        resizeOverlay.removeEventListener('touchstart', handleResizeTouchStart, false)
+        resizeOverlay.removeEventListener("mousedown", handleResizeMouseStart)
+        resizeOverlay.removeEventListener('touchstart', handleResizeTouchStart)
       }
 
     })()
