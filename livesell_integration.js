@@ -1,22 +1,70 @@
 (function () {
-  console.log("Livesell integrated scripted Loaded")
-  const script = document.currentScript
 
-  const attributes = {
-    meetingURL : script.getAttribute("data-livesell-url"),
-    keepProductVisible: script.getAttribute("data-keep-product-visible") === "true" ? true : false
+  // **** CONSTANTS ****
+  const ASPECT_RATIO_16_9 = 16 / 9
+
+  const ACTION_TYPE = {
+    PRODUCT_PAGE: "PRODUCT_PAGE",
+    DRAG_START: "LIVESELL_DRAG_START",
+    DRAG_MOUSEMOVE: "LIVESELL_DRAG_MOUSEMOVE",
+    DRAG_END: "LIVESELL_DRAG_END",
+    DATA_ATTRIBUTES: "LIVESELL_DATA_ATTRIBUTES"
   }
 
-  console.log(attributes)
+  const ACTION = {
+    OPEN: "OPEN",
+    CLOSE: "CLOSE",
+    GET: "GET"
+  }
+
+  const DOM_EVENT = {
+    MESSAGE: "message",
+    MOUSEDOWN: "mousedown",
+    MOUSEUP: "mouseup",
+    MOUSEMOVE: "mousemove",
+    MOUSELEAVE: "mouseleave",
+    TOUCHSTART: "touchstart",
+    TOUCHEND: "touchend",
+    TOUCHMOVE: "touchmove",
+    RESIZE: "resize"
+  }
+
+  const isSmallDevice = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+  const FLOATING_WINDOW_SIZE = isSmallDevice ? {
+    // for small device
+    minWidth: 160,
+    minHeight: 90,
+    width: 240,
+    height: 135,
+    maxWidth: 320,
+    maxHeight:180
+  } : {
+    // for large device
+    minWidth: 240,
+    minHeight: 135,
+    width: 320,
+    height: 180,
+    maxWidth: 640,
+    maxHeight:360
+  }
+
+  const script = document.currentScript
+  const attributes = {
+    meetingURL : script.getAttribute("data-livesell-url"),
+    supportFloatingVideo: script.getAttribute("data-support-floating-video") === "true" ? true : false,
+    keepProductVisible: script.getAttribute("data-keep-product-visible") === "true" ? true : false
+  }
 
   if(!attributes.meetingURL) {
     console.error("ERROR: Please provide meeting URL in livesell integration script.")
     return
   }
 
-  // Add your meeting link here
   const MEETING_URL = attributes.meetingURL
   const LIVESELL_MEETING_ORIGIN = new URL(MEETING_URL).origin
+
+  // ACTUAL LOGIC
 
   // Create the outer div
   const outerDiv = document.createElement('div');
@@ -155,50 +203,33 @@
   document.head.appendChild(style);
 
 
-
   // const meetingIframe = window.document.getElementById("livesell-meeting-iframe");
   const meetingModal = window.document.getElementById('livesell-meeting-modal');
   const draggableOverlay = window.document.getElementById('livesell-draggable-overlay')
   const resizeOverlay = window.document.getElementById('livesell-resizable-overlay')
   const transparentOverlay = window.document.getElementById("livesell-transparent-overlay")
-  const isSmallDevice = window.matchMedia("only screen and (max-width: 760px)").matches;
-
-  const floatingWindowSize = isSmallDevice ? {
-    // for small device
-    minWidth: 160,
-    minHeight: 90,
-    width: 240,
-    height: 135,
-    maxWidth: 320,
-    maxHeight:180
-  } : {
-    // for large device
-    minWidth: 240,
-    minHeight: 135,
-    width: 320,
-    height: 180,
-    maxWidth: 640,
-    maxHeight:360
-  }
-
+  
   // Event listener to receive messages from the livesell meeting iframe
-  const eventListener = window.addEventListener('message', (event) => {
+  window.addEventListener(DOM_EVENT.MESSAGE, (event) => {
 
     if (event.origin !== LIVESELL_MEETING_ORIGIN) return
     const data = event.data
 
     switch (data.actionType) {
-      case 'LIVESELL_DRAG_START':
+      case ACTION_TYPE.DRAG_START:
         handleStartDrag(data.mouseX, data.mouseY)
         break
-      case 'LIVESELL_DRAG_MOUSEMOVE':
+      case ACTION_TYPE.DRAG_MOUSEMOVE:
         handleFrameMousemove(data.offsetX, data.offsetY)
         break
-      case 'LIVESELL_DRAG_END':
+      case ACTION_TYPE.DRAG_END:
         handleDragEnd()
         break
-      case 'PRODUCT_PAGE':
+      case ACTION_TYPE.PRODUCT_PAGE:
         handleProductPage(data)
+        break
+      case ACTION_TYPE.DATA_ATTRIBUTES:
+        handleDataAttributes(data)
         break
     }
 
@@ -214,18 +245,30 @@
     }
   });
 
+  function handleDataAttributes(data) {
+    if (data.action === ACTION.GET) {
+      meetingIframe.contentWindow.postMessage({ 
+        code: data.code,
+        dataAttributes: attributes },
+      LIVESELL_MEETING_ORIGIN) 
+    }
+  }
+
   function handleProductPage(data) {
+    // Return if product overlay is not support & also iƒ meeting is not open on modal iframe
+    if(!attributes.supportFloatingVideo && !meetingIframe.src) return
+
     const productModalEle = window.document.getElementById('livesell-product-modal');
     const productIframe = window.document.getElementById("livesell-product-iframe");
 
-    if (data.action === "OPEN") {
+    if (data.action === ACTION.OPEN) {
       meetingIframe.contentWindow.postMessage({ data: "server", code: data.code }, LIVESELL_MEETING_ORIGIN)
       productIframe.src = data.url
       productModalEle.style.display = "flex"
       meetingModal.classList.add("livesell-floating-modal")
 
-      meetingModal.style.width =  `${floatingWindowSize.width}px`;
-      meetingModal.style.height=  `${floatingWindowSize.height}px`;
+      meetingModal.style.width =  `${FLOATING_WINDOW_SIZE.width}px`;
+      meetingModal.style.height=  `${FLOATING_WINDOW_SIZE.height}px`;
       meetingIframe.style.width = "100%"
       meetingIframe.style.height = "100%"
       meetingModal.style.bottom = '10px'
@@ -398,9 +441,8 @@
   }
 
   function handleResizeMove(evt) {
-    var ratio = 16 / 9;
     const width = startWidth + evt.clientX - startX
-    const height = (width / ratio)
+    const height = (width / ASPECT_RATIO_16_9)
 
     if(canResize(width, height)) return
 
@@ -408,13 +450,16 @@
     meetingModal.style.height = height + 'px';
   }
 
-  function canResize(width, height) {
-    return (width < floatingWindowSize.minWidth
-      || height < floatingWindowSize.minHeight
-      || width > floatingWindowSize.maxWidth
-      || height > floatingWindowSize.maxHeight
-      || width > window.innerWidth
-      || height > window.innerHeight)
+  function canResize(width, height) {    
+    return ( width > FLOATING_WINDOW_SIZE.minWidth
+      && height > FLOATING_WINDOW_SIZE.minHeight
+      && width < FLOATING_WINDOW_SIZE.maxWidth
+      && height < FLOATING_WINDOW_SIZE.maxHeight
+      && width < window.innerWidth
+      && height < window.innerHeight 
+      // half container should be visible while resizing
+      && width / 2 > -meetingModals.offsetLeft 
+    )
   }
 
   function handleResizeMouseMove(evt) {
@@ -460,4 +505,3 @@
   }
 
 })()
-
