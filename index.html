@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Permissions-Policy" content="interest-cohort=(), user-id=()" />
 
-    <title>LiveSell Iframe</title>
+    <title>LiveSell Iframe Embedding</title>
     <style>
       html {
         margin: 0;
@@ -21,18 +21,18 @@
         float: left;
         width: 100%;
         position: relative;
-        /* Or any other positioning you need */
-        /* overflow: hidden; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     </style>
-
-
     
   </head>
 
   <body>
     <main>
       <iframe
+        style="border-radius: 15px;"
         width="800px"
         height="600px"
         allow="camera; microphone; fullscreen"
