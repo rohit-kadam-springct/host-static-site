@@ -1,0 +1,64 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating mini Avatar</title>
+    <style>
+        /* Style the floating window */
+        .floating-video {
+            position: fixed;
+            bottom: 20px;
+            aspect-ratio: 9 / 16;
+            z-index: 9999;
+        }
+
+
+        .dummy-container {
+            height: 20000px;
+        }
+    </style>
+
+
+<script defer>
+    document.addEventListener("DOMContentLoaded", function() {
+        function resizeFloatingVideo() {
+            const floatingVideo = document.getElementById('floatingVideo');
+            const MAX_WIDTH =  250
+            const MIN_WIDTH = 180
+            const ASPECT_RATIO = 9 / 16; // Width / Height ratio of your video
+
+            const screenWidth = window.innerWidth;
+            let maxWidth = Math.min(screenWidth * 0.2, MAX_WIDTH); // Maximum width is 20% of screen width or 400px
+            const minWidth = MIN_WIDTH; // Minimum width
+            maxWidth = Math.max(maxWidth, minWidth); // Ensure maxWidth is at least minWidth
+
+            // Calculate dimensions while maintaining aspect ratio
+            const width = maxWidth;
+            const height = width / ASPECT_RATIO;
+
+            // Apply dimensions
+            floatingVideo.style.width = width + 'px';
+            floatingVideo.style.height = height + 'px';
+        }
+
+        // Initial resize
+        resizeFloatingVideo();
+
+        // Resize on window resize event
+        window.addEventListener('resize', resizeFloatingVideo);
+    });
+</script>
+
+
+</head>
+<body style="background-color: blueviolet;">
+    <!-- Your website content here -->
+    <div class="dummy-container"></div>
+
+    <!-- Floating video window -->
+    <div class="floating-video"  id="floatingVideo">
+        <iframe width="100%" height="100%" src="https://digitalhuman.uk/avatar/1632790723621177533?connect=true&screenAspectRatio=9:14&hideChatInput=true&hideChatHistory=true&dialPageBackground=transparent&disableDragging=true" frameborder="0" allow="camera; microphone; fullscreen" allowfullscreen=""></iframe>
+    </div>
+
+</body>
+</html>
