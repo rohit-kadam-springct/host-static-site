@@ -1,0 +1,1830 @@
+{
+    "Scene": {
+        "embedded": "true",
+        "shadow": "type: pcfsoft; autoUpdate: true",
+        "renderer": "colorManagement: true; physicallyCorrectLights:true;antialias:true",
+        "light": "defaultLightsEnabled: false",
+        "vr-mode-ui": "enabled: false",
+        "device-orientation-permission-ui": "enabled: false",
+        "loading-screen": "enabled: false",
+        "powerPreference": "high-performance",
+        "background": "transparent: false",
+        "style": "width:100%; height:100%; visibility:hidden;"
+    },
+    "Avatar": {
+        "WebGLAvatarAsset": "assets/characters/Ava_Rigged_cmp/Ava_Rigged.gltf",
+        "TTSService": "Azure",
+        "TTSVoice": "en-US-AvaNeural",
+        "AzureLanguage": "en-US",
+        "SpeechRecogLang": "en-US",
+        "STTSource": "vps_sttonly",
+        "PositionX": 0.0,
+        "PositionY": -0.135,
+        "PositionZ": 0.1,
+        "DisableFrustumCulling": true,
+        "InitialPosition": "DefaultCenter"
+    },
+    "BaseSmiles": {
+        "BaseSmileEnable": true,
+        "ShowAnimNames": true,
+        "MinIdle": 0.2,
+        "MaxIdle": 0.4,
+        "MinTalking": 0.1,
+        "MaxTalking": 0.2,
+        "GapIdle": 0.2,
+        "GapTalking": 0.1,
+        "MinFadeIn": 1,
+        "MaxFadeIn": 3,
+        "MinFadeOut": 1,
+        "MaxFadeOUt": 3,
+        "MinPeak": 0.5,
+        "MaxPeak": 1.5,
+        "BaseSmileTalking": [
+            "talkingSmile"
+        ],
+        "BaseSmileIdle": [
+            "idleSmile"
+        ],
+        "BaseSmileListening": [
+            "idleSmile"
+        ]
+    },
+    "BaseAnims": {
+        "BaseAnimEnable": true,
+        "ShowAnimNames": true,
+        "BaseAnimTalking": [
+            "coreIdle9"
+        ],
+        "BaseAnimListening": [
+            "coreListeningNodMedium",
+            "coreListeningNodSmall2",
+            "coreNoddingSmall"
+        ],
+        "BaseAnimIdle": [
+            "coreIdle0",
+            "coreIdle9",
+            "coreIdle13",
+            "coreIdle14",
+            "coreIdle9"
+        ],
+        "BaseAnimThinking": [
+            "coreIdle0",
+            "coreIdle9",
+            "coreIdle13",
+            "coreIdle14",
+            "coreIdle9"
+        ]
+    },
+    "Camera": {
+        "position": "0 1.55 1.3",
+        "rotation": "0 0 0",
+        "camera": "fov: 15; near: 0.05"
+    },
+    "Lights": [
+        {
+            "id": "KeyLight",
+            "position": "-1.6 0.65 2.55",
+            "light": "castShadow: false; intensity: 2.0; color: #f0f7ff"
+        },
+        {
+            "id": "FillLight",
+            "position": "3.0 1.28 0.3",
+            "light": "castShadow: false; intensity: 1.2; color: #ccebff"
+        },
+        {
+            "id": "HemiLight",
+            "light": "color:  #ffffff; groundColor:  #ffdbb8;  intensity:  1.5;  type:  hemisphere"
+        }
+    ],
+    "panel": {
+        "Enable": true,
+        "PositionX": 0.0,
+        "PositionY": 1.55,
+        "PositionZ": -4.44,
+        "RotationX": 0,
+        "RotationY": 0,
+        "RotationZ": 0,
+        "width": 3.2,
+        "height": 1.8,
+        "contentURL": "https://www.trulience.com/home/assets/img/bg/Classroom.png"
+    },
+    "Speech": {
+        "LastSilMinDelay": 0.2,
+        "LastSilMaxDelay": 0.5,
+        "LastSilMinStretch": 0.1,
+        "LastSilMaxStretch": 0.2,
+        "BrowRaiseMinSpeed": 2,
+        "BrowRaiseMaxSpeed": 5,
+        "BrowDownMinSpeed": 3.5,
+        "BrowDownMaxSpeed": 6,
+        "ShowAnimNames": true,
+        "CCInterruptAvatarTalkingWithNewAvatarSpeech": "true",
+        "AudioDelay": -50,
+        "TTSTimeout": 15000
+    },
+    "LookAt": {
+        "Enable": true,
+        "#": "Target can be either 'camera' OR vector3 position",
+        "Target": "camera",
+        "#Target": {
+            "x": 23,
+            "y": 32,
+            "z": 43
+        },
+        "Offset": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "LeftEyeBoneName": "CC_Base_L_Eye",
+        "RightEyeBoneName": "CC_Base_R_Eye",
+        "HeadBoneName": "CC_Base_Head",
+        "MaxHeadAngle": 0.2,
+        "Interval": 1.0,
+        "ClampAngleX": 0.6,
+        "ClampAngleY": 0.2
+    },
+    "BlinkConfig": {
+        "Enable": true,
+        "GapMinIdle": 1.2,
+        "GapMaxIdle": 5.0,
+        "GapMinTalking": 0.5,
+        "GapMaxTalking": 1.5,
+        "GapMinListening": 1.2,
+        "GapMaxListening": 5.0,
+        "MorphNames": [
+            "eyeBlinkLeft",
+            "eyeBlinkRight"
+        ],
+        "MorphMaxValue": [
+            1,
+            1
+        ],
+        "SingleSpeedMin": "4",
+        "SingleSpeedMax": "6",
+        "DoubleSpeedMin": "4",
+        "DoubleSpeedMax": "6",
+        "TimeForDouble": 0.25,
+        "SingleWeighting": 1.0,
+        "DoubleWeighting": 0.2
+    },
+    "Subtitle": {
+        "Enabled": true,
+        "MaxLength": 45,
+        "Padding": 10,
+        "FontSize": 20,
+        "MaxLengthMobile": 35,
+        "FontSizeMobile": 14,
+        "PaddingMobile": 5,
+        "Height": 20,
+        "PositionLeft": 50,
+        "TransformY": -15,
+        "TransformX": -50,
+        "Background": "rgba(0, 0, 0, 0.6)"
+    },
+    "Positions": {
+        "DefaultCenter": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "BottomLeft": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": -0.2,
+                    "y": -0.1,
+                    "z": -1
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeAvatarZoomOutDefaultCenter": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0.05,
+                    "z": -0.5
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenAngledMediumLeft": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0.3,
+                    "y": 0,
+                    "z": -1.2
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": -20,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenAngledSmallLeft": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0.3,
+                    "y": 0,
+                    "z": -1.1
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": -20,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeAvatarDefaultCenter": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": -0.2
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenAngledMediumRight": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": -0.3,
+                    "y": 0,
+                    "z": -1.2
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 20,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenAngledSmallRight": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": -0.3,
+                    "y": 0,
+                    "z": -1.1
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 20,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeAvatarSmallRight": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0.35,
+                    "y": 0,
+                    "z": -0.7
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": -10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatMediumLeft": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0.3,
+                    "y": -0.07,
+                    "z": -0.75
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": -10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatSmallLeft": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0.2,
+                    "y": 0,
+                    "z": -0.5
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": -10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeAvatarSmallLeft": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": -0.35,
+                    "y": 0,
+                    "z": -0.7
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatMediumRight": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": -0.3,
+                    "y": -0.07,
+                    "z": -0.75
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatSmallRight": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": -0.2,
+                    "y": 0,
+                    "z": -0.5
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "Holo": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeAvatarMaxZoomInOffCenterLeft": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": -0.05,
+                    "y": 0,
+                    "z": 0.15
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 5,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeAvatarMaxZoomInCenterUp": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0.15
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeNoAvatar": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 10000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeAvatarDefaultRight": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0.2,
+                    "y": 0,
+                    "z": -0.2
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": -10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeAvatarMediumRight": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0.25,
+                    "y": 0,
+                    "z": -0.4
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": -10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeAvatarDefaultLeft": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": -0.2,
+                    "y": 0,
+                    "z": -0.2
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenFlatLargeAvatarMediumLeft": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": -0.25,
+                    "y": 0,
+                    "z": -0.4
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 10,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenAngledXSmallLeft": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0.3,
+                    "y": 0,
+                    "z": -0.9
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": -20,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "ScreenAngledXSmallRight": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": -0.3,
+                    "y": 0,
+                    "z": -0.9
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 20,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "CenterUpperBodyZoomOut": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0.3,
+                    "z": -2.2
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "CenterUpperBody": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0.2,
+                    "z": -2
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "HoloZoom": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "CenterFace": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "CenterFullBody": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.1,
+                    "z": -3
+                },
+                "Scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "CenterChestUp": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0.1,
+                    "z": -1
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        },
+        "CenterShouldersUp": {
+            "CharacterPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 0.05,
+                    "z": -0.7
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "ScreenPosition": {
+                "Translation": {
+                    "x": -100,
+                    "y": -100,
+                    "z": 1000
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "CameraPosition": {
+                "Translation": {
+                    "x": 0,
+                    "y": 1.55,
+                    "z": 1.3
+                },
+                "Scale": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                },
+                "Rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        }
+    }
+}
