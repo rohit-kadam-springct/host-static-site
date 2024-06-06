@@ -169,7 +169,7 @@
         "DoubleWeighting": 0.2
     },
     "Subtitle": {
-        "Enabled": true,
+        "Enabled": false,
         "MaxLength": 45,
         "Padding": 10,
         "FontSize": 20,
