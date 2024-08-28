@@ -4,6 +4,11 @@
     "#": "---------------- Subtitles ---------------",
     "Subtitle" : {
       "Enabled" : false
-    }
+    },
+    "Camera": {
+      "rig": {
+        "nipple-controls": "mode: static; lookJoystickEnabled: true; moveJoystickEnabled: true; lookJoystickPosition: right; moveJoystickPosition: left; sideMargin:20px; bottomMargin:55px"
+      }
+  }
 }
 
