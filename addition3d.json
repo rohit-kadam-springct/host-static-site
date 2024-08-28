@@ -9,7 +9,7 @@
         "position": "0 0 2.5",
         "#documentation": "https://github.com/c-frame/aframe-extras/tree/master/src/controls#controls",
         "movement-controls": "controls: gamepad,keyboard,nipple; speed: 0.12; constrainToNavMesh: true",
-        "nipple-controls": "mode: static; lookJoystickEnabled: true; moveJoystickEnabled: true; lookJoystickPosition: right; moveJoystickPosition: left; sideMargin:50px; bottomMargin: 55px"
+        "nipple-controls": "mode: static; lookJoystickEnabled: true; moveJoystickEnabled: true; lookJoystickPosition: right; moveJoystickPosition: left; sideMargin:20px; bottomMargin:55px"
       }
   }
 }
