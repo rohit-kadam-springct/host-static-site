@@ -1,0 +1,15 @@
+{
+  "Camera": {
+      "position": "0 1.55 0",
+      "rotation": "0 0 0",
+      "camera": "active:true; fov: 40;",
+      "look-controls": "enabled:true; magicWindowTrackingEnabled:false",
+      "tracked-vr-device": "",
+      "rig": {
+        "position": "0 0 2.5",
+        "#documentation": "https://github.com/c-frame/aframe-extras/tree/master/src/controls#controls",
+        "movement-controls": "controls: gamepad,keyboard,nipple; speed: 0.12; constrainToNavMesh: true",
+        "nipple-controls": "mode: static; lookJoystickEnabled: true; moveJoystickEnabled: true; lookJoystickPosition: right; moveJoystickPosition: left; sideMargin:50px"
+      }
+  }
+}
