@@ -1,6 +1,6 @@
 {
 "#" : "Load from the default configuration",
-    "ParentConfig": "https://trulience.com/conf/jean_cc_env_Shadow.json",
+    "ParentConfig": "https://trulience.com/conf/mickey_env.json",
     "#": "---------------- Subtitles ---------------",
     "Subtitle" : {
       "Enabled" : false
