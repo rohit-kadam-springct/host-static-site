@@ -7,7 +7,7 @@
     },
     "Camera": {
       "rig": {
-        "nipple-controls": "bottomMargin:55px; color: black"
+        "nipple-controls": "mode: static; lookJoystickEnabled: true; moveJoystickEnabled: true; lookJoystickPosition: right; moveJoystickPosition: left; sideMargin:50px; bottomMargin:60px; color: black"
       }
     }
 }
