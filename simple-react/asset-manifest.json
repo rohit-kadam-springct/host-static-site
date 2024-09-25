@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/host-static-site/simple-react/static/css/main.ad5bd4ff.css",
-    "main.js": "/host-static-site/simple-react/static/js/main.5014e620.js",
+    "main.css": "/host-static-site/simple-react/static/css/main.73e8640e.css",
+    "main.js": "/host-static-site/simple-react/static/js/main.b6601794.js",
     "static/js/453.0be8098e.chunk.js": "/host-static-site/simple-react/static/js/453.0be8098e.chunk.js",
     "index.html": "/host-static-site/simple-react/index.html",
-    "main.ad5bd4ff.css.map": "/host-static-site/simple-react/static/css/main.ad5bd4ff.css.map",
-    "main.5014e620.js.map": "/host-static-site/simple-react/static/js/main.5014e620.js.map",
+    "main.73e8640e.css.map": "/host-static-site/simple-react/static/css/main.73e8640e.css.map",
+    "main.b6601794.js.map": "/host-static-site/simple-react/static/js/main.b6601794.js.map",
     "453.0be8098e.chunk.js.map": "/host-static-site/simple-react/static/js/453.0be8098e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad5bd4ff.css",
-    "static/js/main.5014e620.js"
+    "static/css/main.73e8640e.css",
+    "static/js/main.b6601794.js"
   ]
 }
