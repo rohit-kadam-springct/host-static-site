@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="shortcut icon" href="https://trulience.com/home/assets/img/favicon.png">
+	<link rel="shortcut icon" href="https://trulience.com/home/assets/img/favicon.png">
     <title>Trulience Embed: iFrame Example</title>
 
 
@@ -61,11 +61,8 @@
         var avatarId = providedAvatarId === '' ? '12345' : providedAvatarId;
         var connect = getUrlParameter("connect");
         var token = getUrlParameter("token");
-        
-        // var src = window.origin //+ "/avatar/" + avatarId + (token ? "?token=" + token + "&" : "?") + "hideChatHistory=true&hideHangUpButton=true&hideMicButton=true&hideChatInput=true&speakerOffByDefault=false&hideSpeakerButton=true&hideFS=true&micOffByDefault=true&connect=true&registerTrlEvents=auth-success,auth-fail,mic-update,mic-access,speaker-update,media-connected,trl-chat";
-        // &speakerOffByDefault=false&micOffByDefault=true
-
-        let src = "https://rohit-kadam-springct.github.io/host-static-site/simple-react" + "?connect=true&showAvatarOnly=true&registerTrlEvents=auth-success,auth-fail,mic-update,mic-access,speaker-update,media-connected,trl-chat";
+    
+        let src =`https://rohit-kadam-springct.github.io/host-static-site/simple-react?avatarId=${avatarId}${token ? `&token=${token}` : ""}&connect=true&showFullscreenAvatar=true&registerTrlEvents=auth-success,auth-fail,mic-update,mic-access,speaker-update,media-connected`;
         
         let iframe = document.getElementById("iframeId");
         
@@ -157,7 +154,7 @@
         // Send the message to trulience client present within iframe.
         function sendText() {
             var textBoxContent = document.getElementById('textBox').value;
-			var dataToSend = { "command" : "trl-chat", "message" : textBoxContent};
+			var dataToSend = { "command" : "trl-chat-send", "message" : textBoxContent};
 			
 			// Reference to the iframe
 	        var iframe = document.getElementById('iframeId');
@@ -169,7 +166,7 @@
         }
         
         function toggleMic() {
-            var dataToSend = { "command" : "trl-mic-status", "message" : !micEnabled };
+            var dataToSend = { "command" : "trl-mic-set", "message" : !micEnabled };
             console.log("Sending to frame : ", dataToSend);
             var iframe = document.getElementById('iframeId');
             iframe.contentWindow.postMessage(dataToSend, "*");
@@ -182,7 +179,7 @@
                 context.resume();
             }
             
-            var dataToSend = { "command" : "trl-set-speaker-status", "message" : !speakerEnabled };
+            var dataToSend = { "command" : "trl-speaker-set", "message" : !speakerEnabled };
             console.log("Sending to frame : ", dataToSend);
             var iframe = document.getElementById('iframeId');
             iframe.contentWindow.postMessage(dataToSend, "*");
@@ -222,5 +219,3 @@
     </script>
 </body>
 </html>
-
-	
