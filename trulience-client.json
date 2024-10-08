@@ -1,0 +1,9 @@
+{
+    "showLogo" : "true", 
+    "logoSrc" : "https://trulience.com/home/assets/img/arena-logo-white-square.png",
+    "dialPageBackground" : "https://trulience.com/home/assets/img/arenaBg3.jpg",
+    "dialButtonTextColor" : "white",
+    "dialButtonBackground" : "#24343e",
+    "dialButtonText" : "ASK DAISY",
+    "loadingBarColor" : "#00c7f5"
+}
