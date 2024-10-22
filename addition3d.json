@@ -9,5 +9,35 @@
       "rig": {
         "nipple-controls": "mode: static; lookJoystickEnabled: true; moveJoystickEnabled: true; lookJoystickPosition: right; moveJoystickPosition: left; sideMargin:50px; bottomMargin:60px; color: black"
       }
-    }
+    },
+    "panel": {
+        "Enable": true,
+        "PositionX": 0.0,
+        "PositionY": 1.55,
+        "PositionZ": -4.44,
+        "RotationX": 0,
+        "RotationY": 0,
+        "RotationZ": 0,
+        "width": 3.2,
+        "height": 1.8,
+        "FGLeft": -100,
+        "FGTop": 10,
+        "FGWidth": 50,
+        "FGHeight": 50,
+        "#FGAspectRatio": "",
+        "FGAspectRatio": "16/9",
+        "#contentURL": "https://www.trulience.com/home/assets/img/bg/Classroom.png",
+        "contentURL": "/home/assets/img/bg/Classroom.png",
+        "#BgColor format 1": "#FF00FFFF",
+        "#BgColor format 2": "255,255,255,1",
+        "BgColor": "",
+        "BgFit": "cover",
+        "BgPointer": true,
+        "BgVolume": 0.3,
+        "BgCSS": "radial-gradient(circle, rgb(220 220 220 / 73%) 0%, rgb(65 74 84 / 87%) 100%)",
+        "FGScreenURL": "/assets/video/video_placeholder.mp4",
+        "FgFit": "contain",
+        "FgPointer": false,
+        "FgVolume": 0.3
+    },
 }
