@@ -27,7 +27,7 @@
         "#FGAspectRatio": "",
         "FGAspectRatio": "16/9",
         "#contentURL": "https://www.trulience.com/home/assets/img/bg/Classroom.png",
-        "contentURL": "/home/assets/img/bg/Classroom.png",
+        "contentURL": "home/assets/img/bg/Classroom.png",
         "#BgColor format 1": "#FF00FFFF",
         "#BgColor format 2": "255,255,255,1",
         "BgColor": "",
